@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player - Huỳnh Hòa Thuận</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .main-box {
+            width: 95%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px 0;
+        }
+
+        .music-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* LEFT */
+        .left-panel {
+            padding: 35px;
+            background: rgba(0, 0, 0, 0.25);
+            height: 100%;
+        }
+
+        .profile-box {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .profile-box img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            transition: 0.4s;
+        }
+
+        .profile-box img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-box h2 {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 18px;
+            border-radius: 18px;
+            text-align: left;
+        }
+
+        .info p {
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+
+        .playlist-title {
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px;
+            margin-bottom: 15px;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 17px;
+        }
+
+        .track:hover {
+            transform: translateX(6px);
+            background: #0d6efd;
+        }
+
+        .track.active {
+            background: #0d6efd;
+        }
+
+        .track i {
+            font-size: 22px;
+        }
+
+        /* RIGHT */
+        .right-panel {
+            padding: 35px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #0d6efd;
+        }
+
+        .playing-box {
+            text-align: center;
+        }
+
+        .playing-box h2 {
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        /* MUSIC WAVE */
+        .music-wave {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .music-wave span {
+            width: 8px;
+            height: 35px;
+            background: white;
+            border-radius: 10px;
+            animation: wave 1s infinite ease-in-out;
+        }
+
+        .music-wave span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .music-wave span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .music-wave span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .music-wave span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(2);
+            }
+        }
+
+        @media(max-width:768px) {
+
+            .left-panel {
+                margin-bottom: 20px;
+            }
+
+            .profile-box img {
+                width: 140px;
+                height: 140px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main-box">
+
+        <div class="music-card">
+
+            <div class="row g-0">
+
+                <!-- LEFT -->
+                <div class="col-lg-4">
+
+                    <div class="left-panel">
+
+                        <!-- PROFILE -->
+                        <div class="profile-box">
+
+                            <!-- GẮN HÌNH CỦA BẠN -->
+                            <img src="hìnhnenthuanhuynh.jpg" alt="Huỳnh Hòa Thuận">
+
+                            <h2>Huỳnh Hòa Thuận</h2>
+
+                            <div class="info">
+                                <p><strong>MSSV:</strong> 110125173</p>
+                                <p><strong>Lớp:</strong> DA25TTC</p>
+                                <p><strong>Ngành:</strong> Công Nghệ Thông Tin</p>
+                            </div>
+
+                        </div>
+
+                        <!-- PLAYLIST -->
+                        <h3 class="playlist-title">
+                            <i class="fa-solid fa-music"></i>
+                            Playlist
+                        </h3>
+
+                        <div id="playlist">
+
+                            <div class="track active"
+                                data-video="https://drive.google.com/file/d/18pq-CT67PIvbeC-NVnBw6x66-Tnnp88x/preview">
+
+                                <i class="fa-solid fa-circle-play"></i>
+                                <span>10 Ngàn Năm</span>
+
+                            </div>
+
+                            <div class="track"
+                                data-video="https://drive.google.com/file/d/1f-6Y0kNf9xgC6jgL3RbwsnKlD8SnApJp/preview">
+
+                                <i class="fa-solid fa-circle-play"></i>
+                                <span>Ghé Qua</span>
+
+                            </div>
+
+                            <div class="track"
+                                data-video="https://drive.google.com/file/d/1MSh9H2s--7e_w18p_yAQdpIfHLiYh9BB/preview">
+
+                                <i class="fa-solid fa-circle-play"></i>
+                                <span>Già Cùng Nhau Là Được</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-lg-8">
+
+                    <div class="right-panel">
+
+                        <div class="top-bar">
+
+                            <a href="index.html" class="back-btn">
+                                ← Trang chủ
+                            </a>
+
+                            <h5>
+                                <i class="fa-solid fa-headphones"></i>
+                                Music Player
+                            </h5>
+
+                        </div>
+
+                        <!-- PLAYER -->
+                        <div class="playing-box">
+
+                            <h2 id="playing-title">
+                                Đang phát: 10 Ngàn Năm
+                            </h2>
+
+                            <div class="video-container">
+
+                                <iframe id="player"
+                                    src="https://drive.google.com/file/d/18pq-CT67PIvbeC-NVnBw6x66-Tnnp88x/preview"
+                                    frameborder="0"
+                                    allow="autoplay"
+                                    allowfullscreen>
+                                </iframe>
+
+                            </div>
+
+                            <!-- MUSIC EFFECT -->
+                            <div class="music-wave">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const tracks = document.querySelectorAll('.track');
+        const player = document.getElementById('player');
+        const title = document.getElementById('playing-title');
+
+        tracks.forEach(track => {
+
+            track.addEventListener('click', function () {
+
+                tracks.forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                this.classList.add('active');
+
+                const video = this.getAttribute('data-video');
+
+                player.src = video;
+
+                title.innerText = "Đang phát: " + this.innerText;
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

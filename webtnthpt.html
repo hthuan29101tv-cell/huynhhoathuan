@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỳ Thi Tốt Nghiệp THPT - Đăng Nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #b9d7ff 0%, #7caeeb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Nút quay lại trang chủ thiết kế riêng biệt nằm ở góc trên bên trái */
+        .top-nav-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background-color: #ffffff;
+            color: #1652a2;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(22, 82, 162, 0.1);
+        }
+
+        .btn-home:hover {
+            background-color: #1652a2;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(22, 82, 162, 0.3);
+        }
+
+        /* Khung bìa sách màu xanh phía sau */
+        .book-shadow-bg {
+            max-width: 1100px;
+            width: 100%;
+            background: #89bbf2;
+            padding: 0 24px 24px 24px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        /* Ruột giấy trắng bên trong cuốn sách */
+        .main-content {
+            background-color: #ffffff;
+            border-radius: 0 0 30px 30px;
+            display: flex;
+            position: relative;
+            z-index: 2;
+            min-height: 560px;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Đường gáy sách mờ chia đôi trang */
+        .main-content::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            bottom: 30px;
+            left: 50%;
+            width: 1px;
+            background: linear-gradient(to bottom, #eaeaea, #cccccc, #eaeaea);
+        }
+
+        /* Header nằm phía trên cuốn sách */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 15px 10px 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 42px;
+            color: #1052a3;
+        }
+
+        .logo-text h1 {
+            font-size: 19px;
+            color: #1052a3;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        /* Khối đồ họa bóng đèn bên phải */
+        .graphic-section {
+            width: 180px;
+            height: 90px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        /* Thiết lập chung cho 2 trang sách */
+        .page {
+            flex: 1;
+            padding: 40px 55px;
+        }
+
+        .page-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form nhập liệu */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .req {
+            color: #c9302c;
+            font-weight: bold;
+        }
+
+        .input-style {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13.5px;
+            color: #333;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .input-style::placeholder {
+            color: #a9a9a9;
+        }
+
+        .input-style:focus {
+            border-color: #1052a3;
+            box-shadow: 0 0 4px rgba(16, 82, 163, 0.2);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .eye-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* Khung Captcha ô ly */
+        .captcha-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .captcha-img-box {
+            background-color: #f4f7fa;
+            border: 1px solid #d1dbe5;
+            padding: 6px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b78c4;
+            letter-spacing: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 3px;
+            position: relative;
+            user-select: none;
+            background-image: 
+                linear-gradient(rgba(200,210,230,0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200,210,230,0.4) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .refresh-btn:hover {
+            transform: rotate(45deg);
+        }
+
+        .forgot-link {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Các nút bấm */
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 13.5px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .btn-blue {
+            background-color: #1652a2;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .btn-blue:hover {
+            background-color: #0f3f80;
+        }
+
+        .btn-white {
+            background-color: #fff;
+            color: #1652a2;
+            border: 1px solid #1652a2;
+        }
+
+        .btn-white:hover {
+            background-color: #f4f8ff;
+        }
+
+        /* Trang thông báo bên phải */
+        .right-page {
+            padding-left: 65px;
+        }
+
+        .notif-content p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        /* Hotline dưới chân trang */
+        .footer-container {
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .footer-hotline {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-hotline i {
+            font-size: 20px;
+        }
+
+        /* Tương thích thiết bị di động (Responsive) */
+        @media (max-width: 768px) {
+            body { padding-top: 80px; }
+            .top-nav-home { left: 50%; transform: translateX(-50%); top: 15px; }
+            .book-shadow-bg { padding: 10px; }
+            .main-content { flex-direction: column; border-radius: 10px; }
+            .main-content::after { display: none; }
+            .header { flex-direction: column; gap: 15px; text-align: center; }
+            .page { padding: 25px 20px; }
+            .right-page { padding-left: 20px; border-top: 1px solid #eee; }
+            .graphic-section { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav-home">
+        <a href="index.html" class="btn-home">
+            <i class="fa-solid fa-house"></i> Quay lại Trang chủ
+        </a>
+    </div>
+
+    <div class="book-shadow-bg">
+        
+        <header class="header">
+            <div class="logo-section">
+                <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                <div class="logo-text">
+                    <h1>Bộ Giáo dục và Đào tạo<br>Kỳ thi tốt nghiệp THPT</h1>
+                </div>
+            </div>
+            
+            <div class="graphic-section">
+                <svg width="100%" height="100%" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="95" cy="55" r="35" fill="none" stroke="#6ba4e8" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+                    <circle cx="95" cy="55" r="50" fill="none" stroke="#6ba4e8" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
+                    
+                    <path d="M45,35 L47,32 L45,29 L48,27 L50,29 L53,27 L52,24 L55,24 L55,27 L58,29 L60,27 L63,29 L61,32 L63,35 L60,35 L58,33 L55,35 L55,38 L52,38 L53,35 L50,33 L48,35 Z" fill="#8cbcf6" opacity="0.7"/>
+                    
+                    <path d="M125,12 L145,5 L138,22 L134,16 Z" fill="#1052a3"/>
+                    <path d="M125,12 L134,16 L138,22 Z" fill="#4a8deb" opacity="0.8"/>
+                    <path d="M134,16 L132,23 L129,19 Z" fill="#0b3e7a"/>
+                    <path d="M95,40 Q115,30 123,16" fill="none" stroke="#1052a3" stroke-width="1" stroke-dasharray="2 3"/>
+
+                    <path d="M82,75 Q72,60 84,48 Q88,58 84,75 Z" fill="#4b8ce4"/>
+                    <path d="M108,75 Q118,60 106,48 Q102,58 106,75 Z" fill="#4b8ce4"/>
+                    
+                    <path d="M85,50 C82,42 88,32 95,32 C102,32 108,42 105,50 C104,54 101,57 101,62 L89,62 C89,57 86,54 85,50 Z" fill="#1052a3"/>
+                    <rect x="91" y="64" width="8" height="2" rx="1" fill="#4b8ce4"/>
+                    <rect x="92" y="68" width="6" height="2" rx="1" fill="#4b8ce4"/>
+                    <path d="M94,71 L96,73 L94,73 Z" fill="#4b8ce4"/>
+                    
+                    <path d="M92,46 L94,42 L96,42 L98,46" fill="none" stroke="#ffffff" stroke-width="1"/>
+                </svg>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <div class="page left-page">
+                <h2 class="page-title">ĐĂNG NHẬP</h2>
+                
+                <form onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Số CCCD/CMND/ĐDCN <span class="req">(*)</span></label>
+                        <input type="text" class="input-style" placeholder="Số CCCD/CMND/ĐDCN">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mã đăng nhập <span class="req">(*)</span></label>
+                        <div class="password-wrapper">
+                            <input type="password" class="input-style" placeholder="Mã đăng nhập">
+                            <i class="fa-regular fa-eye eye-icon" title="Hiển thị mật khẩu"></i>
+                        </div>
+                    </div>
+
+                    <div class="captcha-row">
+                        <div class="captcha-img-box">5FJP0</div>
+                        <button type="button" class="refresh-btn" title="Đổi mã xác nhận">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mã xác nhận <span class="req">(*)</span></label>
+                        <input type="text" class="input-style" placeholder="Mã xác nhận">
+                    </div>
+
+                    <a href="#" class="forgot-link">Quên mã đăng nhập ?</a>
+
+                    <button type="submit" class="btn btn-blue">Đăng nhập</button>
+                    <button type="button" class="btn btn-white">Đăng nhập Cổng dịch vụ công quốc gia</button>
+                </form>
+            </div>
+
+            <div class="page right-page">
+                <h2 class="page-title">THÔNG BÁO</h2>
+                <div class="notif-content">
+                    <p>Thí sinh đăng ký dự thi (ĐKDT) trực tuyến để xét công nhận tốt nghiệp chính thức trên hệ thống từ ngày 24/04/2026 đến 17h00 ngày 05/05/2026.</p>
+                    <p>Thí sinh tự do (đã tốt nghiệp THPT, trung cấp) chỉ đăng ký xét tuyển nộp phiếu đăng ký dự thi để xét tuyển về các điểm TNHS để các điểm TNHS nhập thông tin lên hệ thống từ ngày 1/5/2026 đến ngày 20/5/2026.</p>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <div class="footer-container">
+        <footer class="footer-hotline">
+            <i class="fa-solid fa-phone-volume"></i> Hotline 1800 8000 nhánh số 2
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thế Giới Di Động</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f3f3f3;
+}
+
+/* TOP */
+
+.top{
+    background:orange;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+/* HEADER */
+
+header{
+    background:#ffd500;
+    padding:15px 40px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    background:black;
+    color:#ffd500;
+    padding:10px 15px;
+    border-radius:8px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* SEARCH */
+
+.search input{
+    width:400px;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    outline:none;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-weight:bold;
+}
+
+.home{
+    background:white;
+    padding:10px 18px;
+    border-radius:10px;
+    text-decoration:none;
+    color:black;
+    border:1px solid #ddd;
+    transition:0.3s;
+}
+
+.home:hover{
+    background:black;
+    color:#ffd500;
+}
+
+/* CATEGORY */
+
+.category{
+    background:#ffd500;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:12px;
+    border-top:1px solid #ddd;
+}
+
+.category div:hover{
+    color:red;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.main{
+    width:90%;
+    margin:auto;
+}
+
+/* BANNER */
+
+.banner{
+    margin-top:20px;
+    background:#ffe600;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:30px;
+}
+
+.banner-text h1{
+    font-size:70px;
+    color:red;
+}
+
+.banner-text h2{
+    font-size:55px;
+    color:blue;
+}
+
+.banner-text p{
+    margin-top:10px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.banner img{
+    width:320px;
+}
+
+/* SECTION */
+
+.section{
+    background:white;
+    margin-top:25px;
+    border-radius:15px;
+    padding:20px;
+}
+
+.title{
+    font-size:35px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* SALE MENU */
+
+.sale-menu{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.sale-menu button{
+    padding:10px 18px;
+    border:none;
+    border-radius:20px;
+    background:#eee;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.sale-menu button:first-child{
+    background:orangered;
+    color:white;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/* CARD */
+
+.card{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+    transition:0.3s;
+    background:white;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:contain;
+}
+
+.card h3{
+    margin-top:10px;
+    font-size:18px;
+}
+
+.price{
+    color:red;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.old{
+    color:gray;
+    text-decoration:line-through;
+    margin-top:5px;
+}
+
+.sale{
+    margin-top:10px;
+    background:red;
+    color:white;
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:8px;
+    font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:40px;
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- TOP -->
+
+<div class="top">
+    HOT SALE CUỐI TUẦN
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        thegioididong
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search">
+        <input type="text" placeholder="Bạn tìm gì...">
+    </div>
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+        <a href="index.html" class="home">
+           ⌂ Trang chủ
+        </a>
+
+        <div>Đăng nhập</div>
+
+        <div>Giỏ hàng</div>
+
+        <div>Hồ Chí Minh</div>
+
+    </div>
+
+</div>
+
+</header>
+
+<!-- CATEGORY -->
+
+<div class="category">
+
+    <div>Điện thoại</div>
+    <div>Laptop</div>
+    <div>Tablet</div>
+    <div>Đồng hồ</div>
+    <div>Phụ kiện</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- BANNER -->
+
+    <div class="banner">
+
+        <div class="banner-text">
+
+            <h1>SIÊU SALE</h1>
+
+            <h2>SALE KÉP</h2>
+
+            <p>Giảm giá đến 50%</p>
+
+        </div>
+
+        <img src="iphone16prm.jpg">
+
+    </div>
+
+    <!-- SECTION -->
+
+    <div class="section">
+
+        <div class="title">
+            Khuyến mãi online
+        </div>
+
+        <!-- SALE MENU -->
+
+        <div class="sale-menu">
+
+            <button>Flash Sale</button>
+            <button>Điện thoại</button>
+            <button>Laptop</button>
+            <button>Apple</button>
+
+        </div>
+
+        <!-- PRODUCTS -->
+
+        <div class="products">
+
+            <!-- CARD 1 -->
+
+            <div class="card">
+
+                <img src="iphone16prm.jpg">
+
+                <h3>iPhone 16 Pro Max</h3>
+
+                <div class="price">
+                    31.990.000đ
+                </div>
+
+                <div class="old">
+                    34.990.000đ
+                </div>
+
+                <div class="sale">
+                    Giảm 10%
+                </div>
+
+            </div>
+
+            <!-- CARD 2 -->
+
+            <div class="card">
+
+                <img src="samsung24ultra.webp">
+
+                <h3>Samsung S24 Ultra</h3>
+
+                <div class="price">
+                    28.490.000đ
+                </div>
+
+                <div class="old">
+                    30.990.000đ
+                </div>
+
+                <div class="sale">
+                    Giảm 8%
+                </div>
+
+            </div>
+
+            <!-- CARD 3 -->
+
+            <div class="card">
+
+                <img src="laptopatus.jpg">
+
+                <h3>Laptop Asus</h3>
+
+                <div class="price">
+                    15.990.000đ
+                </div>
+
+                <div class="old">
+                    18.990.000đ
+                </div>
+
+                <div class="sale">
+                    Giảm 15%
+                </div>
+
+            </div>
+
+            <!-- CARD 4 -->
+
+            <div class="card">
+
+                <img src="dongho.png">
+
+                <h3>Apple Watch S9</h3>
+
+                <div class="price">
+                    9.990.000đ
+                </div>
+
+                <div class="old">
+                    11.990.000đ
+                </div>
+
+                <div class="sale">
+                    Giảm 20%
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    Huỳnh Hòa Thuận - DA25TTC
+</footer>
+
+</body>
+</html>

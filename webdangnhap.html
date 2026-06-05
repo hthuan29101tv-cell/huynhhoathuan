@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Đăng nhập</title>
+
+<style>
+
+body{
+    background:white;
+    font-family:"Times New Roman";
+}
+
+.login-box{
+    width:350px;
+    margin:20px auto;
+    background:#dcdcdc;
+    border:15px solid green;
+    padding:20px;
+}
+
+/* Nút về trang chủ */
+
+.home-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#ffd400;
+    color:black;
+    padding:10px 15px;
+    border-radius:5px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.home-btn:hover{
+    background:orange;
+}
+
+h1{
+    font-size:45px;
+    margin-bottom:30px;
+}
+
+input[type="text"],
+input[type="password"]{
+    width:100%;
+    height:35px;
+    margin-top:10px;
+    margin-bottom:20px;
+    border:none;
+    border-bottom:3px solid red;
+    background:white;
+    font-size:18px;
+}
+
+label{
+    font-size:18px;
+}
+
+.gender{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.checkbox{
+    margin-bottom:25px;
+}
+
+button{
+    background:#00b894;
+    color:white;
+    border:none;
+    padding:15px 40px;
+    font-size:22px;
+    cursor:pointer;
+    border-radius:3px;
+}
+
+button:hover{
+    background:#00997a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <!-- Đường dẫn về trang chủ -->
+
+    <a href="index.html" class="home-btn">
+        ⌂ Trang chủ
+    </a>
+
+    <h1>Đăng nhập</h1>
+
+    <!-- USERNAME -->
+
+    <input type="text" placeholder="Nhập tên đăng nhập">
+
+    <label>Tên đăng nhập</label>
+
+    <!-- PASSWORD -->
+
+    <input type="password" placeholder="Nhập mật khẩu">
+
+    <label>Mật khẩu</label>
+
+    <!-- GENDER -->
+
+    <div class="gender">
+
+        <input type="radio" name="gt" checked>
+        Nam
+
+        <br><br>
+
+        <input type="radio" name="gt">
+        Nữ
+
+    </div>
+
+    <!-- CHECKBOX -->
+
+    <div class="checkbox">
+
+        <input type="checkbox">
+        Lưu giá trị đăng nhập
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <button>
+        Đăng nhập
+    </button>
+
+</div>
+
+</body>
+
+</html>

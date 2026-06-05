@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Điểm rèn luyện - Thống kê lớp</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f4f4f4;
+    display:flex;
+}
+
+.sidebar{
+    width:240px;
+    background:#111;
+    color:white;
+    min-height:100vh;
+    padding:20px 15px;
+}
+
+.sidebar h2{
+    color:#1e90ff;
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+.user{
+    margin-bottom:20px;
+    border-bottom:1px solid #333;
+    padding-bottom:15px;
+}
+
+.user p{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.role{
+    background:#28a745;
+    padding:4px 8px;
+    border-radius:4px;
+    font-size:12px;
+}
+
+.menu-title{
+    font-size:13px;
+    color:#aaa;
+    margin:20px 0 10px;
+}
+
+.menu a{
+    display:block;
+    color:#ddd;
+    text-decoration:none;
+    padding:12px;
+    border-radius:5px;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.menu a:hover,
+.menu .active{
+    background:#0d6efd;
+    color:white;
+}
+
+.content{
+    flex:1;
+    padding:25px;
+}
+
+.home-link{
+    display:inline-block;
+    text-decoration:none;
+    color:black;
+    background:white;
+    border:1px solid #ccc;
+    padding:8px 12px;
+    border-radius:5px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.home-link:hover{
+    background:#0d6efd;
+    color:white;
+}
+
+.topbar{
+    background:white;
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    margin:0 -25px 25px -25px;
+}
+
+h1{
+    font-size:28px;
+    margin-bottom:20px;
+    font-weight:normal;
+}
+
+.search-box{
+    background:white;
+    padding:20px;
+    border-radius:5px;
+    margin-bottom:25px;
+    border:1px solid #ddd;
+}
+
+.search-box h3{
+    margin-bottom:15px;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr 1fr;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.form-group label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+select{
+    width:100%;
+    padding:9px;
+    margin-top:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+.reset{
+    color:#0d6efd;
+    margin-left:15px;
+    font-size:14px;
+}
+
+.main-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+.table-box{
+    background:white;
+    padding:15px;
+    border:1px solid #ddd;
+}
+
+.table-box h3{
+    margin-bottom:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,td{
+    border:1px solid #999;
+    padding:10px;
+    font-size:14px;
+    text-align:left;
+}
+
+th{
+    background:#f5f5f5;
+}
+
+.center{
+    text-align:center;
+}
+
+.badge{
+    padding:4px 8px;
+    color:white;
+    border-radius:4px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.xuatsac{ background:#28a745; }
+.tot{ background:#0d6efd; }
+.kha{ background:#17a2b8; }
+.trungbinh{ background:#6c757d; }
+.kem{ background:#dc3545; }
+
+.chart-box{
+    background:white;
+    padding:20px;
+    border:1px solid #ddd;
+}
+
+.chart-box h3{
+    margin-bottom:20px;
+}
+
+.circle{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    margin:auto;
+    background:conic-gradient(
+        #28a745 0% 10%,
+        #0d6efd 10% 35%,
+        #17a2b8 35% 65%,
+        #6c757d 65% 90%,
+        #dc3545 90% 100%
+    );
+    position:relative;
+}
+
+.circle::after{
+    content:"";
+    width:100px;
+    height:100px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:60px;
+    left:60px;
+}
+
+.legend{
+    margin-top:25px;
+}
+
+.legend p{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+    padding:8px 0;
+    font-size:14px;
+}
+
+footer{
+    margin-top:40px;
+    color:#777;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>ĐIỂM RÈN LUYỆN</h2>
+
+    <div class="user">
+        <p>HUỲNH HÒA THUẬN</p>
+        <span class="role">CVHT/GVCN</span>
+    </div>
+
+    <div class="menu">
+        <a href="#">📄 Hướng dẫn sử dụng</a>
+
+        <div class="menu-title">KẾT QUẢ ĐÁNH GIÁ</div>
+
+        <a href="#">✔ Danh sách kết quả</a>
+        <a href="#" class="active">📊 Thống kê lớp</a>
+    </div>
+</div>
+
+<div class="content">
+
+    <a href="index.html" class="home-link">
+        ⌂ Trang chủ
+    </a>
+
+    <div class="topbar">☰</div>
+
+    <h1>Thống kê kết quả đánh giá</h1>
+
+    <div class="search-box">
+        <h3>Thông tin tìm kiếm</h3>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Học kỳ</label>
+                <select>
+                    <option>HK1-2025-2026</option>
+                    <option>HK2-2025-2026</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Lớp</label>
+                <select>
+                    <option>DA25TTC - Công nghệ thông tin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Xếp loại</label>
+                <select>
+                    <option></option>
+                    <option>Xuất sắc</option>
+                    <option>Tốt</option>
+                    <option>Khá</option>
+                    <option>Trung bình</option>
+                    <option>Kém</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vai trò</label>
+                <select>
+                    <option>Hội đồng đánh giá</option>
+                    <option>Cố vấn học tập</option>
+                </select>
+            </div>
+        </div>
+
+        <button>Tìm kiếm</button>
+        <a href="#" class="reset">reset</a>
+    </div>
+
+    <div class="main-grid">
+
+        <div class="table-box">
+            <h3>Danh sách Sinh viên</h3>
+
+            <table>
+                <tr>
+                    <th class="center">STT</th>
+                    <th>MSSV</th>
+                    <th>Họ và tên</th>
+                    <th>Số điểm</th>
+                    <th>Xếp loại</th>
+                </tr>
+
+                <tr><td class="center">1</td><td>110125201</td><td>Nguyễn Văn An</td><td>92</td><td><span class="badge xuatsac">Xuất sắc</span></td></tr>
+                <tr><td class="center">2</td><td>110125202</td><td>Trần Minh Khang</td><td>85</td><td><span class="badge tot">Tốt</span></td></tr>
+                <tr><td class="center">3</td><td>110125203</td><td>Lê Hoàng Phúc</td><td>78</td><td><span class="badge kha">Khá</span></td></tr>
+                <tr><td class="center">4</td><td>110125204</td><td>Phạm Thị Mỹ Linh</td><td>66</td><td><span class="badge trungbinh">Trung bình</span></td></tr>
+                <tr><td class="center">5</td><td>110125205</td><td>Võ Thành Đạt</td><td>55</td><td><span class="badge kem">Kém</span></td></tr>
+                <tr><td class="center">6</td><td>110125206</td><td>Nguyễn Thị Thu Hà</td><td>81</td><td><span class="badge tot">Tốt</span></td></tr>
+                <tr><td class="center">7</td><td>110125207</td><td>Huỳnh Quốc Bảo</td><td>73</td><td><span class="badge kha">Khá</span></td></tr>
+                <tr><td class="center">8</td><td>110125208</td><td>Đặng Gia Huy</td><td>60</td><td><span class="badge trungbinh">Trung bình</span></td></tr>
+                <tr><td class="center">9</td><td>110125209</td><td>Trương Minh Thư</td><td>88</td><td><span class="badge tot">Tốt</span></td></tr>
+                <tr><td class="center">10</td><td>110125210</td><td>Bùi Ngọc Trân</td><td>95</td><td><span class="badge xuatsac">Xuất sắc</span></td></tr>
+                <tr><td class="center">11</td><td>110125211</td><td>Mai Thanh Tùng</td><td>70</td><td><span class="badge kha">Khá</span></td></tr>
+                <tr><td class="center">12</td><td>110125212</td><td>Đỗ Minh Quân</td><td>64</td><td><span class="badge trungbinh">Trung bình</span></td></tr>
+            </table>
+        </div>
+
+        <div class="chart-box">
+            <h3>Tỉ lệ điểm rèn luyện</h3>
+
+            <div class="circle"></div>
+
+            <div class="legend">
+                <p><span>Xuất sắc (2/12)</span><b>16.7%</b></p>
+                <p><span>Tốt (3/12)</span><b>25%</b></p>
+                <p><span>Khá (3/12)</span><b>25%</b></p>
+                <p><span>Trung bình (3/12)</span><b>25%</b></p>
+                <p><span>Kém (1/12)</span><b>8.3%</b></p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        CopyRight © 2026 TVU - Lớp DA25TTC
+    </footer>
+
+</div>
+
+</body>
+</html>
